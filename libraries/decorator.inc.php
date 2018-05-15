@@ -91,7 +91,12 @@ function value_url(&$var, &$fields) {
 
 class Decorator
 {
-	function Decorator($value) {
+    /**
+     * @var mixed
+     */
+	private  $v;
+
+	function __construct($value) {
 		$this->v = $value;
 	}
 	
@@ -102,7 +107,12 @@ class Decorator
 
 class FieldDecorator extends Decorator
 {
-	function FieldDecorator($fieldName, $default = null) {
+    /**
+     * @var mixed
+     */
+	private $f;
+
+	function __construct($fieldName, $default = null) {
 		$this->f = $fieldName;
 		if ($default !== null) $this->d = $default;
 	}
@@ -114,7 +124,16 @@ class FieldDecorator extends Decorator
 
 class ArrayMergeDecorator extends Decorator
 {
-	function ArrayMergeDecorator($arrays) {
+    /**
+     * @var mixed
+     */
+	private $m;
+
+    /**
+     * ArrayMergeDecorator constructor.
+     * @param $arrays
+     */
+	function __construct($arrays) {
 		$this->m = $arrays;
 	}
 	
@@ -129,7 +148,15 @@ class ArrayMergeDecorator extends Decorator
 
 class ConcatDecorator extends Decorator
 {
-	function ConcatDecorator($values) {
+    /**
+     * @var mixed
+     */
+	private $c;
+    /**
+     * ConcatDecorator constructor.
+     * @param $values
+     */
+	function __construct($values) {
 		$this->c = $values;
 	}
 	
@@ -144,7 +171,22 @@ class ConcatDecorator extends Decorator
 
 class CallbackDecorator extends Decorator
 {
-	function CallbackDecorator($callback, $param = null) {
+    /**
+     * @var mixed
+     */
+	private $fn;
+
+    /**
+     * @var mixed
+     */
+	private $p;
+
+    /**
+     * CallbackDecorator constructor.
+     * @param $callback
+     * @param null $param
+     */
+	function __construct($callback, $param = null) {
 		$this->fn = $callback;
 		$this->p = $param;
 	}
@@ -156,7 +198,26 @@ class CallbackDecorator extends Decorator
 
 class IfEmptyDecorator extends Decorator
 {
-	function IfEmptyDecorator($value, $empty, $full = null) {
+    /**
+     * @var mixed
+     */
+	private $v;
+    /**
+     * @var mixed
+     */
+	private $e;
+    /**
+     * @var mixed
+     */
+	private $f;
+
+    /**
+     * IfEmptyDecorator constructor.
+     * @param $value
+     * @param $empty
+     * @param null $full
+     */
+	function __construct($value, $empty, $full = null) {
 		$this->v = $value;
 		$this->e = $empty;
 		if ($full !== null) $this->f = $full;
@@ -173,7 +234,21 @@ class IfEmptyDecorator extends Decorator
 
 class UrlDecorator extends Decorator
 {
-	function UrlDecorator($base, $queryVars = null) {
+    /**
+     * @var mixed
+     */
+	private $b;
+    /**
+     * @var mixed
+     */
+	private $q;
+
+    /**
+     * UrlDecorator constructor.
+     * @param $base
+     * @param null $queryVars
+     */
+	function __construct($base, $queryVars = null) {
 		$this->b = $base;
 		if ($queryVars !== null)
 			$this->q = $queryVars;
@@ -199,7 +274,20 @@ class UrlDecorator extends Decorator
 
 class replaceDecorator extends Decorator
 {
-	function replaceDecorator($str, $params) {
+    /**
+     * @var mixed
+     */
+	private $s;
+    /**
+     * @var mixed
+     */
+	private $p;
+    /**
+     * replaceDecorator constructor.
+     * @param $str
+     * @param $params
+     */
+	function __construct($str, $params) {
 		$this->s = $str;
 		$this->p = $params;
 	}
@@ -212,4 +300,3 @@ class replaceDecorator extends Decorator
 		return $str;
 	}
 }
-?>

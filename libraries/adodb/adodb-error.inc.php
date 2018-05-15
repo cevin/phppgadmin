@@ -103,10 +103,9 @@ function adodb_error_pg($errormsg)
 			 	 => DB_ERROR_ALREADY_EXISTS
         );
 	reset($error_regexps);
-    while (list($regexp,$code) = each($error_regexps)) {
-        if (preg_match($regexp, $errormsg)) {
-            return $code;
-        }
+	foreach ($error_regexps as $key=>$item) {
+	    if (preg_match($key,$errormsg))
+	        return $item;
     }
     // Fall back to DB_ERROR if there was no mapping.
     return DB_ERROR;
