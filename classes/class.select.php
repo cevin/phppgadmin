@@ -11,10 +11,10 @@
 * 
 */
 class XHtmlSimpleElement {
-	var $_element;
-	var $_siblings = array();
-	var $_htmlcode;	
-	var $_attributes = array();
+	public $_element;
+	public $_siblings = array();
+	public $_htmlcode;
+	public $_attributes = array();
 
 	
 	/**
@@ -24,7 +24,7 @@ class XHtmlSimpleElement {
 	* derived class
 	* 
 	*/
-	function XHtmlSimpleElement($element = null) {
+	function __construct($element = null) {
 
 		$this->_element = $this->is_element();
 		
@@ -89,13 +89,12 @@ class XHtmlSimpleElement {
 * 
 */
 class XHtmlElement extends XHtmlSimpleElement {
-	var $_text     = null;	
-	var $_htmlcode = "";
-	var $_siblings = array();
+	public $_text     = null;
+	public $_htmlcode = "";
+	public $_siblings = array();
 
-	function XHtmlElement($text = null) {
-		XHtmlSimpleElement::XHtmlSimpleElement();
-		
+	function __construct($text = null) {
+//		XHtmlSimpleElement::XHtmlSimpleElement();
 		if ($text) $this->set_text($text);
 	}
 
@@ -159,8 +158,8 @@ class XHtmlElement extends XHtmlSimpleElement {
 }
 
 class XHTML_Button extends XHtmlElement {
-	function XHTML_Button ($name, $text = null) {
-		parent::XHtmlElement();
+	function __construct ($name, $text = null) {
+		parent::__construct($text);
 		
 		$this->set_attribute("name", $name);
 		
@@ -170,18 +169,18 @@ class XHTML_Button extends XHtmlElement {
 
 
 class XHTML_Option extends XHtmlElement {
-	function XHTML_Option($text, $value = null) {
-		XHtmlElement::XHtmlElement(null);			
+	function __construct($text, $value = null) {
+		parent::__construct(null);
 		$this->set_text($text);
 	}
 }
 
 
 class XHTML_Select extends XHTMLElement {
-	var $_data;
+	public $_data;
 
-	function XHTML_Select ($name, $multiple = false, $size = null) {
-		XHtmlElement::XHtmlElement();					
+	function __construct ($name, $multiple = false, $size = null) {
+		parent::__construct();
 
 		$this->set_attribute("name", $name);
 		if ($multiple) $this->set_attribute("multiple","multiple");
